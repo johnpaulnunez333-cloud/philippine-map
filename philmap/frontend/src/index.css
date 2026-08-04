@@ -1,0 +1,346 @@
+:root {
+  --ocean-deep: #0A2942;
+  --ocean-mid: #123B57;
+  --teal: #14746F;
+  --sand: #EFE3C8;
+  --coral: #E4572E;
+  --coral-dark: #C43F1C;
+  --ink: #14201A;
+  --white: #FFFFFF;
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--sand);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  background: var(--ocean-deep);
+}
+
+@media (max-width: 860px) {
+  .auth-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+.auth-visual {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 20%, var(--ocean-mid), var(--ocean-deep) 70%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem;
+}
+
+.auth-visual .brand {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 600;
+  color: var(--sand);
+  line-height: 1.05;
+}
+
+.auth-visual .tagline {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: 1rem;
+}
+
+.pin-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pin-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral);
+  opacity: 0.7;
+  animation: drift 6s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0px); opacity: 0.4; }
+  50% { transform: translateY(-14px); opacity: 0.9; }
+}
+
+.auth-panel {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+}
+
+.auth-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.auth-card .sub {
+  color: #5a6a63;
+  font-size: 0.92rem;
+  margin-bottom: 2rem;
+}
+
+.field {
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.7rem 0.85rem;
+  border: 1.5px solid #d8d0bd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: var(--font-body);
+  background: #fbfaf6;
+  transition: border-color 0.15s ease;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--coral);
+  background: var(--white);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--coral);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--coral-dark);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  background: #fbe4de;
+  color: var(--coral-dark);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.switch-link {
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: #5a6a63;
+  text-align: center;
+}
+
+.switch-link a {
+  color: var(--coral);
+  font-weight: 600;
+}
+
+.app-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  height: 60px;
+  background: var(--ocean-deep);
+  color: var(--sand);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+}
+
+.topbar .brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.topbar .user-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+}
+
+.topbar .logout-btn {
+  background: transparent;
+  border: 1px solid var(--teal);
+  color: var(--sand);
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+
+.topbar .logout-btn:hover {
+  background: var(--teal);
+}
+
+.main-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  overflow: hidden;
+}
+
+@media (max-width: 760px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.sidebar {
+  background: var(--white);
+  border-right: 1px solid #e4dcc7;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.sidebar h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.spot-form {
+  background: #f6f2e6;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.spot-form input, .spot-form select, .spot-form textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #d8d0bd;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-body);
+}
+
+.spot-form .hint {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--teal);
+  margin-bottom: 0.6rem;
+}
+
+.spot-card {
+  border: 1px solid #e4dcc7;
+  border-radius: 8px;
+  padding: 0.8rem;
+  margin-bottom: 0.7rem;
+  transition: border-color 0.15s ease;
+}
+
+.spot-card:hover {
+  border-color: var(--coral);
+  cursor: pointer;
+}
+
+.spot-card .name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.spot-card .meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #5a6a63;
+  margin-top: 0.3rem;
+}
+
+.spot-card .desc {
+  font-size: 0.83rem;
+  color: #444;
+  margin-top: 0.4rem;
+}
+
+.spot-card .delete-btn {
+  background: none;
+  border: none;
+  color: var(--coral);
+  font-size: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+.empty-state {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #8a8272;
+  text-align: center;
+  padding: 2rem 0;
+}
