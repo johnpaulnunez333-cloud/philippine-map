@@ -16,15 +16,19 @@ def create_app():
     JWTManager(app)
     Bcrypt(app)
 
-    app.register_blueprint(auth_bp, url_prefix="/api/auth")
-    app.register_blueprint(favorites_bp, url_prefix="/api")
+    app.register_blueprint(auth_bp, url_prefix='/api/auth')
+    app.register_blueprint(favorites_bp, url_prefix='/api')
 
-    @app.route("/api/health", methods=["GET"])
+    @app.route('/api/health', methods=['GET'])
     def health():
         return jsonify({"status": "ok", "service": "Philippine Map API"}), 200
 
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+            print("Database tables created successfully!")
+        except Exception as e:
+            print(f"Error initializing database: {e}")
 
     return app
 
