@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import generate_password_hash, check_password_hash
-from datetime import datetime
+from datetime import datetime, timezone
 
 db = SQLAlchemy()
 
@@ -9,7 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    default=lambda: datetime.now(timezone.utc)
     favorites = db.relationship("FavoriteSpot", backref="owner", lazy=True, cascade="all, delete-orphan")
 
     def set_password(self, raw_password):
@@ -25,7 +25,7 @@ class User(db.Model):
             "email": self.email,
             "created_at": self.created_at.isoformat()
         }
-
+        
 class FavoriteSpot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -35,7 +35,7 @@ class FavoriteSpot(db.Model):
     longitude = db.Column(db.Float, nullable=False)
     province = db.Column(db.String(100))
     category = db.Column(db.String(50), default="general")
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    default=lambda: datetime.now(timezone.utc)
 
     def to_dict(self):
         return {
